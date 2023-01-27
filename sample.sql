@@ -72,3 +72,24 @@ yearGroup, surname, preferredName
 SELECT ROUND(SUM(attainmentValue) / (COUNT(NULLIF(attainmentValue,''))), 2) as `meanAverage`
 FROM gibbonStudentEnrolment
 GROUP BY gibbonCourseID
+
+
+
+
+
+
+
+
+
+
+
+--another sample--
+
+SELECT s.student_id, s.name, e.course, e.exam_group, s.score AS 'Score',
+  AVG(s.score) OVER (PARTITION BY e.student_id) AS 'Student Average',
+  AVG(s.score) OVER (PARTITION BY e.exam_group) AS 'Course Average' 
+FROM student_records s INNER JOIN student_enrolment e 
+  ON s.student_id = e.student_id 
+  INNER JOIN student_scores sc ON e.student_id = sc.student_id
+  INNER JOIN exam_group g ON e.exam_group = g.exam_group
+LIMIT 10;
