@@ -349,3 +349,66 @@ Expected Output Table:
 |John        |80        |90           |170        |85           |75          |80            |
 |Jane        |70        |0            |70         |70           |70          |80            |
 
+
+
+
+
+
+The following SQL query will generate the desired output table: 
+
+```SQL
+SELECT s.name AS Student_Name, 
+       c.name AS Course_Name,
+       es.score AS Course_Score, 
+       SUM(es.score) OVER (PARTITION BY s.name) AS Total_Score, 
+       AVG(es.score) OVER (PARTITION BY s.name) AS Average_Score
+FROM students s
+JOIN enrolment e ON s.id = e.student_id
+JOIN courses c ON e.course_id = c.id
+JOIN exams_scores es ON e.id = es.enrolment_id
+GROUP BY s.name, c.name, es.score
+```
+
+Example demo data for the above query:
+
+Students (s):
++----+-------+
+| id | name  |
++----+-------+
+|  1 | John  |
+|  2 | Jane  |
++----+-------+
+
+Courses (c):
++----+-----------+
+| id | name      |
++----+-----------+
+|  1 | Math      |
+|  2 | Science   |
+|  3 | History   |
++----+-----------+
+
+Enrolment (e):
++----+------------+-----------+
+| id | student_id | course_id |
++----+------------+-----------+
+|  1 |          1 |         1 |
+|  2 |          1 |         2 |
+|  3 |          1 |         3 |
+|  4 |          2 |         2 |
+|  5 |          2 |         3 |
++----+------------+-----------+
+
+Exams Scores (es):
++-----+------------+---------+
+| id  | enrolment_id | score  |
++-----+------------+---------+
+|  1  |          1 |     5.0 |
+|  2  |          2 |     8.0 |
+|  3  |          3 |     7.0 |
+|  4  |          4 |     9.0 |
+|  5  |          5 |     6.0 |
++-----+------------+---------+
+
+Result:
+
