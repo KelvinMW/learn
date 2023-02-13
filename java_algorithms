@@ -1,0 +1,51 @@
+Sure! Here are 4 basic algorithms written in Java: 
+
+```Java
+// Bubble Sort Algorithm
+public static void bubbleSort(int[] arr) {
+	for (int i = 0; i < arr.length - 1; i++) {
+		for (int j = 0; j < arr.length - 1 - i; j++) {
+			if (arr[j] > arr[j + 1]) {
+				// swap elements
+				int temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
+	}
+}
+
+// Selection Sort Algorithm
+public static void selectionSort(int[] arr) {
+	for (int i = 0; i < arr.length - 1; i++) {
+		// find the minimum element in the unsorted array
+		int minIdx = i;
+		for (int j = i + 1; j < arr.length; j++) {
+			if (arr[j] < arr[minIdx]) {
+				minIdx = j;
+			}
+		}
+ 
+		// swap the found minimum element with the first element
+		int temp = arr[minIdx];
+		arr[minIdx] = arr[i];
+		arr[i] = temp;
+	}
+}
+
+// Insertion Sort Algorithm
+public static void insertionSort(int[] arr) {
+	for (int i = 1; i < arr.length; i++) {
+		int currElem = arr[i];
+		int prevKey = i - 1;
+ 
+		// shift element until the previous element is lesser
+		while (prevKey >= 0 && arr[prevKey] > currElem) {
+			arr[prevKey + 1] = arr[prevKey];
+			prevKey--;
+		}
+ 
+		arr[prevKey + 1] = currElem;
+	}
+}
+
