@@ -1,2 +1,4 @@
 ./openmrs
 addons
+Openmrs
+gnuhealth -Tryton
