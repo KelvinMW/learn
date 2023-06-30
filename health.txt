@@ -1,4 +1,5 @@
 ./openmrs
 addons
 Openmrs
-gnuhealth -Tryton
+gnuhealth -Tryton 6.0 [client & server]
+soa for web
