@@ -1,3 +1,4 @@
+https://lh3.googleusercontent.com/bard/APmgjFtDyAFPQbIsO50L7p0JtWWLZwNUMtTaqRKUsjR6cRQT02oO3eqe5K5T4bkbQzVyHj5yZDv0VXacfKorfEul5XUF9Mr5CBfBXTA_gNMm4UzZ52G2RwJMxqMTj12RmbhRGhTpUXgX2YqLfrNmfJVN51hsLwqGcbJgMVops6lAxg902X8mTkyG-ayM2-yONOd87mjuCMr64EGkVKySmch8xzEXps_Zv50zXgTaGmmirx41JXPOIw_weZ_p3eZjbrjmnlibsCMpvD8ICO3g8qrekysbKAZZ-A
 $sqlResult = $result->fetchAll(PDO::FETCH_ASSOC); // Assuming $result stores your query results
 
 foreach ($sqlResult as &$row) {
