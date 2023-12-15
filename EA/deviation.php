@@ -1,3 +1,26 @@
+$sqlResult = $result->fetchAll(PDO::FETCH_ASSOC); // Assuming $result stores your query results
+
+foreach ($sqlResult as &$row) {
+  $values = array_column($sqlResult, 'mean_score'); // Extract all mean scores
+  $row['standard_deviation'] = number_format(sqrt(array_sum(array_map(function ($v) { return pow($v - $row['mean_score'], 2); }, $values)) / (count($values) - 1)), 2); // Calculate and format standard deviation
+}
+
+unset($row); // Unset reference to avoid data duplication
+
+
+SELECT c.name AS CourseName, fg.name AS FormGroupName, iac.type AS exam_type, AVG(e.attainmentValue) AS mean_score
+FROM gibbonCourse AS c
+INNER JOIN gibbonCourseClass AS cc ON c.gibbonCourseID = cc.gibbonCourseID
+INNER JOIN gibbonInternalAssessmentColumn AS iac ON cc.gibbonCourseClassID = iac.gibbonCourseClassID
+INNER JOIN gibbonInternalAssessmentEntry AS e ON iac.gibbonInternalAssessmentColumnID = e.gibbonInternalAssessmentColumnID
+INNER JOIN gibbonStudentEnrolment AS se ON e.gibbonPersonIDStudent = se.gibbonPersonID
+INNER JOIN gibbonFormGroup AS fg ON se.gibbonFormGroupID = fg.gibbonFormGroupID
+WHERE sy.gibbonSchoolYearID = :gibbonSchoolYearID
+AND iac.type IN (:examTypes)
+AND c.gibbonCourseID IN (:courses)
+AND fg.gibbonFormGroupID = :formGroup
+GROUP BY c.name, fg.name, iac.type
+
 <?php foreach ($formattedData as $row): ?>
 <tr>
   <td><?php echo $row['CourseName']; ?></td>
