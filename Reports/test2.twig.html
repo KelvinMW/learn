@@ -228,6 +228,15 @@
     
             {% endfor %}
         </tr>
+        <tr><td class="header bg-primary border-top border-bottom border-left border-right">Promoted To Next Class Status :</td>
+            <td>
+                {% if (mean < 55)  %}
+                {{Might Be Reatined}}
+                {% elseif (mean <= 55) %}
+                {{Good Progress}}
+                {% endif %}
+        </td>
+    </tr>
     </table>
     
     <br/>
