@@ -1,0 +1,19 @@
+{% if (mean >= 90) %}
+{{'Outstanding'}}
+{% elseif (mean >= 80) and (mean <= 89) %}
+{{'Excellent'}}
+{% elseif (mean >= 70) and (mean <= 79) %}
+{{'Very good'}}
+{% elseif (mean >= 60) and (mean <= 69) %}
+{{'Good'}}
+{% elseif (mean >= 50) and (mean <= 59) %}
+{{'Above average'}}
+{% elseif (mean >= 40 and mean <= 49) %}
+{{'Average'}}
+{% elseif (mean >= 35 and mean <= 39) %}
+{{'Below Average'}}
+{% elseif (mean >= 1 and mean <= 34)  %}
+{{'Needs To Improve'}}
+{% elseif mean <= 0 %}
+{{''}}
+{% endif %}
