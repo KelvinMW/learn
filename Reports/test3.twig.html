@@ -230,7 +230,14 @@
             {% for assessment in allAssessments %}
                 {% set colspan = assessment.attainmentActive == 'Y' and assessment.effortActive == 'Y' ? 2 : 1 %}
                     <td class="border-top border-bottom border-left {{ loop.last and colspan == 1 ? 'border-right' }}">
-                    {{- (totalArray[assessment.name])|round(1) }}
+                    {% set lastMean = mean%}
+                    {% if (lastMean < 55)  %}
+                    {{lastMean}}
+                    {{'Might Be Reatined'}}
+                    {% elseif (lastMean >= 55) %}
+                    {{'Good Progress'}}
+                    {{lastMean}}
+                    {% endif %}
                     </td>
                     <td class="border-top border-bottom {{ colspan == 1 ? 'border-left' }} {{ loop.last ? 'border-right' }}">
                         &nbsp;
